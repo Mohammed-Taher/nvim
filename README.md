@@ -2,6 +2,6 @@
 
 I Love Neovim, so these are my configuration files. Everything is written in Lua.
 
-I use [https://github.com/neovim/nvim-lspconfig](lsp-config) and [https://github.com/nvim-treesitter/nvim-treesitter](Treesitter).
+I use [LSP-config](https://github.com/neovim/nvim-lspconfig) and [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter).
 
-Colorscheme is [https://github.com/folke/tokyonight.nvim](Tokoynight).
+Colorscheme is [Tokoynight](https://github.com/folke/tokyonight.nvim).
