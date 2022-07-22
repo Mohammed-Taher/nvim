@@ -40,3 +40,8 @@ keymap("n", "<Down>", ":resize +1<CR>", default_opts)
 
 -- Telescope
 keymap("n", "<C-p>", "<cmd>Telescope find_files<CR>", default_opts)
+
+
+-- Navigation
+keymap("n", "<C-d>", '5j', default_opts)
+keymap("n", "<C-u>", '5k', default_opts)

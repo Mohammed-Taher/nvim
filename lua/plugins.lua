@@ -132,6 +132,9 @@ function M.setup()
 				require("config.whichkey").setup()
 			end,
 		}
+
+		-- Vim Illuminate
+		use {'RRethy/vim-illuminate'}
 end
 
 

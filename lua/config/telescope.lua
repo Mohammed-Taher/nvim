@@ -11,6 +11,7 @@ function M.setup()
 
 	require("telescope").setup{
 		defaults = {
+			sorting_strategy = 'ascending',
 			mappings = {
 				i = {
 					["<esc>"] = actions.close
