@@ -124,6 +124,14 @@ function M.setup()
         require("config.alpha").setup()
       end,
     }
+
+		-- WhichKey
+		use {
+			"folke/which-key.nvim",
+			config = function()
+				require("config.whichkey").setup()
+			end,
+		}
 end
 
 
