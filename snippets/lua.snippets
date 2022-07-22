@@ -1,0 +1,8 @@
+snippet setup
+	local M = {}
+
+	function M.setup()
+		require '$1'.setup{}
+	end
+
+	return M
