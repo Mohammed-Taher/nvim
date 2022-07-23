@@ -9,16 +9,12 @@ function M.setup()
 	local dashboard = require "alpha.themes.dashboard"
 	local function header()
 		return {
-			[[                                                   ]],
-			[[                                                   ]],
 			[[███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ]],
 			[[████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ]],
 			[[██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ]],
 			[[██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ]],
 			[[██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ]],
 			[[╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ]],
-			[[                                                   ]],
-			[[                                                   ]],
 		}
   end
 
@@ -26,8 +22,9 @@ function M.setup()
 
   dashboard.section.buttons.val = {
     dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-    dashboard.button("c", "  Configuration", ":e $MYVIMRC <CR>"),
-    dashboard.button("Ctrl-p", "  Find File", "<cmd>Telescope find_files<CR>"),
+    dashboard.button(", e p", "  Plugins",  ":e $HOME/.config/nvim/lua/plugins.lua <CR>"),
+    dashboard.button(", e m", "  Keymaps", ":e $HOME/.config/nvim/lua/keymaps.lua <CR>"),
+    dashboard.button(", f f", "  Find File", "<cmd>Telescope find_files<CR>"),
     dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
   }
 
@@ -36,16 +33,16 @@ function M.setup()
     local total_plugins = #vim.tbl_keys(packer_plugins)
     local datetime = os.date "%d-%m-%Y %H:%M:%S"
     local plugins_text = 
-      "    "
+      "   "
       .. total_plugins
       .. " plugins"
-      .. "    v"
+      .. "     v"
       .. vim.version().major
       .. "."
       .. vim.version().minor
       .. "."
       .. vim.version().patch
-      .. "   "
+      .. "     "
       .. datetime
 
     -- Quote

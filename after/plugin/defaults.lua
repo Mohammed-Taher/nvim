@@ -15,6 +15,9 @@ opt.updatetime = 250 --Decrease update time
 opt.signcolumn = "yes" -- Always show sign column
 opt.clipboard = "unnamedplus" -- Access system clipboard
 opt.cursorline = true
+opt.wildmenu = true
+opt.smartindent = true
+opt.hidden = true
 
 -- Time in milliseconds to wait for a mapped sequence to complete.
 opt.timeoutlen = 300
