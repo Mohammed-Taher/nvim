@@ -18,14 +18,15 @@ opt.cursorline = true
 opt.wildmenu = true
 opt.smartindent = true
 opt.hidden = true
+opt.cmdheight = 0
 
 -- Time in milliseconds to wait for a mapped sequence to complete.
 opt.timeoutlen = 300
 
 -- Highlight on yank
-vim.cmd [[
+vim.cmd([[
   augroup YankHighlight
     autocmd!
     autocmd TextYankPost * silent! lua vim.highlight.on_yank()
   augroup end
-]]
+]])

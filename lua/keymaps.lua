@@ -47,11 +47,15 @@ local keymappings = function()
 	keymap("n", "<Leader>em", "<cmd>e $HOME/.config/nvim/lua/keymaps.lua<CR>", default_opts)
 	keymap("n", "<Leader>ev", "<cmd>e $MYVIMRC<CR>", default_opts)
 
-	-- Better Window Movement
-	keymap("n", "<C-h>", "<C-w>h", default_opts)
-	keymap("n", "<C-j>", "<C-w>j", default_opts)
-	keymap("n", "<C-k>", "<C-w>k", default_opts)
-	keymap("n", "<C-l>", "<C-w>l", default_opts)
+	--LuaSnip
+	vim.cmd([[
+  noremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
+	snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+	]])
+
+	--Color Picker
+	keymap("n", "<C-c>", "<cmd>PickColor<cr>", default_opts)
+	keymap("i", "<C-c>", "<cmd>PickColorInsert<cr>", default_opts)
 end
 
 local terminal_keymappings = function()

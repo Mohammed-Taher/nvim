@@ -8,17 +8,21 @@ function M.setup()
 	local luasnip = require("luasnip")
 	local lsp = require("lsp-zero")
 	lsp.preset("recommended")
-	lsp.nvim_workspace()
+	lsp.set_preferences({
+		set_lsp_kemaps = false,
+	})
+	lsp.nvim_workspace({
+		library = vim.api.nvim_get_runtime_file("", true),
+	})
 
-	local lsp_formatting = function(bufnr)
-		vim.lsp.buf.format({
-			filter = function(client)
-				-- apply whatever logic you want (in this example, we'll only use null-ls)
-				return client.name == "null-ls"
-			end,
-			bufnr = bufnr,
-		})
-	end
+	-- local lsp_formatting = function(bufnr)
+	-- 	vim.lsp.buf.format({
+	-- 		filter = function(client)
+	-- 			return client.name == "null-ls"
+	-- 		end,
+	-- 		bufnr = bufnr,
+	-- 	})
+	-- end
 
 	-- if you want to set up formatting on save, you can use this as a callback
 	local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
@@ -30,10 +34,16 @@ function M.setup()
 			if client.supports_method("textDocument/formatting") then
 				vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 				vim.api.nvim_create_autocmd("BufWritePre", {
+					desc = "Auto format before save.",
 					group = augroup,
 					buffer = bufnr,
 					callback = function()
-						lsp_formatting(bufnr)
+						vim.lsp.buf.format({
+							bufnr = bufnr,
+							filter = function(client)
+								return client.name == "null-ls"
+							end,
+						})
 					end,
 				})
 			end
@@ -43,16 +53,15 @@ function M.setup()
 	null_ls.setup({
 		on_attach = null_opts.on_attach,
 		sources = {
-			null_ls.builtins.formatting.prettierd,
+			null_ls.builtins.formatting.prettierd.with({
+				filetypes = { "html", "json", "svelte", "markdown", "css", "javascript", "javascriptreact" },
+				-- command = "./node_modules/.bin/prettier",
+			}),
 			null_ls.builtins.formatting.stylua,
-			null_ls.builtins.formatting.eslint,
 			null_ls.builtins.formatting.phpcsfixer,
 			null_ls.builtins.formatting.blade_formatter,
 			null_ls.builtins.formatting.djhtml,
-			null_ls.builtins.code_actions.eslint,
-			null_ls.builtins.code_actions.refactoring,
 			null_ls.builtins.completion.tags,
-			null_ls.builtins.diagnostics.eslint,
 			null_ls.builtins.diagnostics.flake8,
 			null_ls.builtins.diagnostics.phpcs,
 		},
@@ -78,13 +87,16 @@ function M.setup()
 
 	lsp.setup_nvim_cmp({
 		sources = {
-			{ name = "nvim_lsp_signature_help" },
 			{ name = "nvim_lsp" },
-			{ name = "luasnip" },
-			{ name = "buffer" },
-			{ name = "cmdline" },
+			{ name = "nvim_lsp_signature_help" },
+			{ name = "luasnip", keyword_length = 3 },
 			{ name = "path" },
+			{ name = "buffer", keyword_length = 3 },
+			{ name = "cmdline" },
 			{ name = "tags" },
+		},
+		window = {
+			documentation = cmp.config.window.bordered(),
 		},
 		mapping = {
 
@@ -114,6 +126,8 @@ function M.setup()
 
 			["<Down>"] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
 			["<Up>"] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), { "i" }),
+			["<C-u>"] = cmp.mapping.scroll_docs(-4),
+			["<C-f>"] = cmp.mapping.scroll_docs(4),
 		},
 		formatting = {
 			format = function(entry, vim_item)
@@ -138,9 +152,21 @@ function M.setup()
 	})
 
 	lsp.on_attach(function(client, bufnr)
+		local noremap = { buffer = bufnr, remap = false }
+		local bind = vim.keymap.set
+		-- LSP Saga
+		bind("n", "<F4>", "<cmd>Lspsaga code_action<CR>", noremap)
+		bind("n", "<F2>", "<cmd>Lspsaga rename<CR>", noremap)
+		bind("n", "K", "<cmd>Lspsaga hover_doc<CR>", noremap)
+		bind("n", "<C-k>", "<cmd>Lspsaga signature_help<CR>", noremap)
+
 		-- Load vim illuminate
 		require("illuminate").on_attach(client)
 	end)
+
+	lsp.configure("emmet_ls", {
+		filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "blade" },
+	})
 
 	lsp.setup()
 end

@@ -6,3 +6,11 @@ snippet setup
 	end
 
 	return M
+
+snippet use
+	use {
+		"$1",
+		config = function()
+			require("config.$1")	
+		end
+	}

@@ -23,6 +23,7 @@ function M.setup()
 	local function plugins(use)
 		use("wbthomason/packer.nvim")
 		use("folke/tokyonight.nvim")
+		use("rebelot/kanagawa.nvim")
 
 		-- NvimTree
 		use({
@@ -151,7 +152,7 @@ function M.setup()
 			"nvim-lualine/lualine.nvim",
 			requires = { "kyazdani42/nvim-web-devicons", opt = true },
 			config = function()
-				require("config.lualine").setup()
+				-- require("config.lualine").setup()
 			end,
 		})
 
@@ -168,7 +169,7 @@ function M.setup()
 			tag = "v2.*",
 			requires = "kyazdani42/nvim-web-devicons",
 			config = function()
-				require("config.bufferline").setup()
+				-- require("config.bufferline").setup()
 			end,
 		})
 
@@ -184,8 +185,66 @@ function M.setup()
 			"glepnir/lspsaga.nvim",
 			branch = "main",
 			config = function()
-				require("config.lspsaga")
+				require("config.lspsaga").setup()
 			end,
+		})
+
+		use({
+			"norcalli/nvim-colorizer.lua",
+			config = function()
+				require("config.nvim-colorizer").setup()
+			end,
+		})
+
+		use({
+			"ziontee113/color-picker.nvim",
+			config = function()
+				require("config.color-picker").setup()
+			end,
+		})
+
+		-- Testing
+		use("vim-test/vim-test")
+		use({
+			"nvim-neotest/neotest",
+			wants = {
+				"plenary.nvim",
+				"nvim-treesitter",
+				"FixCursorHold.nvim",
+				"neotest-plenary",
+				"neotest-phpunit",
+			},
+			requires = {
+				"nvim-lua/plenary.nvim",
+				"nvim-treesitter/nvim-treesitter",
+				"antoinemadec/FixCursorHold.nvim",
+				"olimorris/neotest-phpunit",
+				"nvim-neotest/neotest-plenary",
+			},
+			config = function()
+				require("config.neotest").setup()
+			end,
+		})
+
+		-- Lua Dev
+		use({
+			"folke/lua-dev.nvim",
+			config = function()
+				require("config.lua-dev")
+			end,
+		})
+
+		-- Vim-surround
+		use({ "tpope/vim-surround" })
+
+		-- Tabout
+		use({
+			"abecodes/tabout.nvim",
+			config = function()
+				require("config.tabout")
+			end,
+			wants = { "nvim-treesitter" },
+			after = { "nvim-cmp" },
 		})
 	end
 

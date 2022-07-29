@@ -1,21 +1,27 @@
 local M = {}
 
 function M.setup()
-	require("nvim-tree").setup {
+	require("nvim-tree").setup({
+		sort_by = "name",
 		disable_netrw = true,
 		auto_reload_on_write = true,
 		hijack_netrw = true,
+		view = {
+			side = "right",
+			number = false,
+			relativenumber = false,
+		},
 		renderer = {
 			highlight_git = true,
 			highlight_opened_files = "all",
 			indent_markers = {
 				enable = true,
 				icons = {
-            corner = "└",
-            edge = "│",
-            item = "│",
-            none = " ",
-          },
+					corner = "└",
+					edge = "│",
+					item = "│",
+					none = " ",
+				},
 			},
 			icons = {
 				webdev_colors = true,
@@ -55,19 +61,16 @@ function M.setup()
 			},
 			special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
 		},
-		view = {
-		},
 		filters = {
 			custom = { ".git" },
-			dotfiles = true,
+			dotfiles = false,
 		},
 		update_cwd = true,
 		update_focused_file = {
 			enable = true,
 			update_cwd = true,
 		},
-	}
-
+	})
 end
 
 return M
