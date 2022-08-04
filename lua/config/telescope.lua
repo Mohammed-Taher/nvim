@@ -1,11 +1,5 @@
 local M = {}
 
-local center_list = require("telescope.themes").get_dropdown({
-	width = 0.5,
-	results_height = 15,
-	previewer = false,
-})
-
 function M.setup()
 	local actions = require("telescope.actions")
 
@@ -20,7 +14,6 @@ function M.setup()
 				"--column",
 				"--smart-case",
 			},
-			file_ignore_patterns = { "node_modules" },
 			sorting_strategy = "ascending",
 			mappings = {
 				i = {
@@ -41,16 +34,36 @@ function M.setup()
 				grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
 				qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 				file_sorter = require("telescope.sorters").get_fuzzy_file,
-				file_ignore_patterns = { "node_modules" },
+				file_ignore_patterns = { "node_modules", ".git", "vendor" },
 				generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
 				path_display = { "truncate" },
 				winblend = 0,
+				color_devicons = true,
+			},
+			lsp_document_symbols = {
+				theme = "dropdown",
+				previewer = false,
+				prompt_prefix = "  ",
+				selection_caret = "   ",
+				entry_prefix = "    ",
 				color_devicons = true,
 			},
 			tags = {
 				prompt_prefix = "   ",
 			},
 		},
+		extensions = {
+			file_browser = {
+				prompt_prefix = "  ",
+				selection_caret = "   ",
+				entry_prefix = "    ",
+				previewer = false,
+				files = false,
+				display_stats = false,
+			},
+		},
 	})
+
+	require("telescope").load_extension("file_browser")
 end
 return M

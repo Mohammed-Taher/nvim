@@ -83,6 +83,10 @@ function M.setup()
 			end,
 		})
 
+		use({
+			"nvim-telescope/telescope-file-browser.nvim",
+		})
+
 		-- Indent Blank Line
 		use({
 			"lukas-reineke/indent-blankline.nvim",
@@ -152,7 +156,7 @@ function M.setup()
 			"nvim-lualine/lualine.nvim",
 			requires = { "kyazdani42/nvim-web-devicons", opt = true },
 			config = function()
-				-- require("config.lualine").setup()
+				require("config.lualine").setup()
 			end,
 		})
 
@@ -169,7 +173,7 @@ function M.setup()
 			tag = "v2.*",
 			requires = "kyazdani42/nvim-web-devicons",
 			config = function()
-				-- require("config.bufferline").setup()
+				require("config.bufferline").setup()
 			end,
 		})
 
@@ -230,21 +234,27 @@ function M.setup()
 		use({
 			"folke/lua-dev.nvim",
 			config = function()
-				require("config.lua-dev")
+				require("config.lua-dev").setup()
 			end,
 		})
 
 		-- Vim-surround
 		use({ "tpope/vim-surround" })
 
-		-- Tabout
+		use("MunifTanjim/nui.nvim")
+
 		use({
-			"abecodes/tabout.nvim",
+			"rcarriga/nvim-notify",
 			config = function()
-				require("config.tabout")
+				require("config.nvim-notify").setup()
 			end,
-			wants = { "nvim-treesitter" },
-			after = { "nvim-cmp" },
+		})
+
+		use({
+			"Mohammed-Taher/AdvancedNewFile.nvim",
+			config = function()
+				require("config.advanced_new_file")
+			end,
 		})
 	end
 

@@ -37,6 +37,7 @@ local keymappings = function()
 
 	-- Telescope
 	keymap("n", "<C-p>", "<cmd>Telescope find_files<CR>", default_opts)
+	keymap("n", "<C-r>", "<cmd>Telescope lsp_document_symbols<Cr>", default_opts)
 
 	-- Navigation
 	keymap("n", "<C-d>", "5j", default_opts)
@@ -56,6 +57,13 @@ local keymappings = function()
 	--Color Picker
 	keymap("n", "<C-c>", "<cmd>PickColor<cr>", default_opts)
 	keymap("i", "<C-c>", "<cmd>PickColorInsert<cr>", default_opts)
+
+	-- Advanced New File
+	keymap("n", "<S-Cr>", "<cmd>AdvancedNewFile<Cr>", default_opts)
+
+	-- Save files
+	keymap("n", "<Leader>w", "<cmd>write<Cr>", default_opts)
+	keymap("i", "<C-S>", "<cmd>write<Cr>", default_opts)
 end
 
 local terminal_keymappings = function()
