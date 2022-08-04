@@ -10,6 +10,6 @@ Colorscheme is [Kanagawa](https://github.com/rebelot/kanagawa.nvim).
 
 ## TODO
 
-- Convert snippets files to lua.
-- Fix some minor bugs in lsp-zero configurations.
-- Refactor lsp-zero file.
+- [ ] Convert snippets files to lua.
+- [ ] Fix some minor bugs in lsp-zero configurations.
+- [ ] Refactor lsp-zero file.
