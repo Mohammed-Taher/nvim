@@ -22,9 +22,14 @@ function M.setup()
 
 	local function plugins(use)
 		use("wbthomason/packer.nvim")
-		use("folke/tokyonight.nvim")
-		use("rebelot/kanagawa.nvim")
-
+		-- use("folke/tokyonight.nvim")
+		-- use("rebelot/kanagawa.nvim")
+		use({
+			"marko-cerovac/material.nvim",
+			config = function()
+				require("config.material-theme").setup()
+			end,
+		})
 		-- NvimTree
 		use({
 			"kyazdani42/nvim-tree.lua",
