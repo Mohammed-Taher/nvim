@@ -18,7 +18,6 @@ opt.cursorline = true
 opt.wildmenu = true
 opt.smartindent = true
 opt.hidden = true
-opt.cmdheight = 0
 
 -- Time in milliseconds to wait for a mapped sequence to complete.
 opt.timeoutlen = 300
