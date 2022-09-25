@@ -5,7 +5,6 @@ function M.setup()
 
 	saga.init_lsp_saga({
 		diagnostic_header = { " ", " ", " ", " " },
-		show_diagnostic_source = true,
 		code_action_icon = "💡",
 		code_action_num_shortcut = true,
 		code_action_lightbulb = {

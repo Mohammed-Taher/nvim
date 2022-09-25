@@ -24,6 +24,7 @@ function M.setup()
 		use("wbthomason/packer.nvim")
 		-- use("folke/tokyonight.nvim")
 		-- use("rebelot/kanagawa.nvim")
+		use("sam4llis/nvim-tundra")
 		use({
 			"marko-cerovac/material.nvim",
 			config = function()
@@ -101,13 +102,13 @@ function M.setup()
 		})
 
 		-- TreeSitter
-		use({
-			"nvim-treesitter/nvim-treesitter",
-			run = ":TSUpdate",
-			config = function()
-				require("config.treesitter").setup()
-			end,
-		})
+		-- use({
+		-- 	"nvim-treesitter/nvim-treesitter",
+		-- 	run = ":TSUpdate",
+		-- 	config = function()
+		-- 		require("config.treesitter").setup()
+		-- 	end,
+		-- })
 
 		-- Autopair
 		use({
